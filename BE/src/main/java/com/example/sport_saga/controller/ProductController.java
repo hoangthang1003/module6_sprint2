@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/public/product")
@@ -20,10 +22,14 @@ public class ProductController {
     private IProductService iProductService;
 
     @GetMapping("")
-    public ResponseEntity<Page<Product>> listEmployee(@RequestParam(value = "page", defaultValue = "0") int page) {
-        Pageable pageable = PageRequest.of(page, 7);
+    public ResponseEntity<Page<Product>> listProduct(@RequestParam(value = "page", defaultValue = "0") int page) {
+        Pageable pageable = PageRequest.of(page, 6);
         Page<Product> listProduct = iProductService.showList(pageable);
         return new ResponseEntity<>(listProduct, HttpStatus.OK);
+    }
+    @GetMapping("/product")
+    public List<Product> productList() {
+        return iProductService.findAll();
     }
     @GetMapping("/{id}")
     public Product findById(@PathVariable("id") Integer id) {
@@ -32,7 +38,7 @@ public class ProductController {
 
     @GetMapping("/gender/{gender}")
     public ResponseEntity<Page<Product>> showAll(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable Boolean gender){
-        Pageable pageable = PageRequest.of(page, 7);
+        Pageable pageable = PageRequest.of(page, 6);
         Page<Product> listProduct = iProductService.showListByGender(pageable,gender);
         return new ResponseEntity<>(listProduct, HttpStatus.OK);
     };

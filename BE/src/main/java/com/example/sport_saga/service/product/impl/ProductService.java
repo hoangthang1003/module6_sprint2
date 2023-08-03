@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService implements IProductService {
     @Autowired
@@ -21,12 +23,21 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Page<Product> showListByGender(Pageable pageable,Boolean gender) {
+    public List<Product> findAll() {
+        return iProductRepository.findAll();
+    }
+
+    @Override
+    public Page<Product> showListByGender(Pageable pageable, Boolean gender) {
         return iProductRepository.findAllProductByGender(pageable,gender);
     }
 
     @Override
     public Product findById(Integer idProduct) {
         return iProductRepository.findById(idProduct).get();
+    }
+    @Override
+    public List<Product> findByProductType(Integer type) {
+        return iProductRepository.findByProductType(type);
     }
 }

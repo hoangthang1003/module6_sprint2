@@ -77,7 +77,6 @@ public class SecurityController {
             }
         });
         users.setRoles(roles);
-        System.out.println(users);
         AccountUser accountUser = accountUserService.saveAccountUser(users);
         if (accountUser != null) {
             return new ResponseEntity<>(new ResponseMessage("Create user success!!!"), HttpStatus.CREATED);

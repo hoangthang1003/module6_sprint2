@@ -12,9 +12,7 @@ export function Login() {
     const [failedAccount, setFailedAccount] = useState(null);
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const [accountFacebook, setAccountFacebook] = useState(null);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

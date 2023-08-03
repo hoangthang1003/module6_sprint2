@@ -8,8 +8,8 @@ import {Shop} from "./component/shop";
 import {ShopSingle} from "./component/shop_single";
 import {Login} from "./component/Login";
 import "../src/css/login.css"
-import {ShopDetail} from "./component/shop-context";
 import {SignUp} from "./component/SignUp";
+import {Cart} from "./component/CartContext";
 
 function App() {
   return (
@@ -26,8 +26,7 @@ function App() {
          <Route path={"/shop/shop_single/:id"} element={<ShopSingle />} />
          <Route path={"/login"} element={<Login />} />
          <Route path={"/signup"} element={<SignUp />} />
-
-         <Route path={"/shop-detail"} element={<ShopDetail />} />
+         <Route path={"/cart"} element={<Cart />} />
      </Routes>
 
   <Footer />

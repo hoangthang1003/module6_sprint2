@@ -1,34 +1,46 @@
-// CartContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { useContext } from "react";
 
-const CartContext = createContext();
+import { useNavigate } from "react-router-dom";
+import { CartItem } from "./cart-item";
 
-export function CartProvider({ children }) {
-    const [cartItems, setCartItems] = useState([]);
+import "../css/cart.css";
+import {ShopContext} from "./shop-context";
+export const Cart = () => {
+    const { cartItems, getTotalCartAmount, checkout,products} = useContext(ShopContext);
+    const totalAmount = getTotalCartAmount();
 
-    const addToCart = (item) => {
-        setCartItems((prevCartItems) => [...prevCartItems, item]);
-    };
-
-    const removeFromCart = (itemId) => {
-        setCartItems((prevCartItems) => prevCartItems.filter((item) => item.id !== itemId));
-    };
-
-    const clearCart = () => {
-        setCartItems([]);
-    };
+    const navigate = useNavigate();
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
-            {children}
-        </CartContext.Provider>
-    );
-}
+        <div className="cart">
+            <div>
+                <h1>Your Cart Items</h1>
+            </div>
+            <div className="cart">
+                {products.map((product) => {
+                    console.log(cartItems[product.idProduct])
+                    if (cartItems[product.idProduct] !== 0) {
+                        return <CartItem data={product} />;
+                    }
+                })}
+            </div>
 
-export function useCart() {
-    const context = useContext(CartContext);
-    if (!context) {
-        throw new Error('useCart must be used within a CartProvider');
-    }
-    return context;
-}
+            {totalAmount > 0 ? (
+                <div className="checkout">
+                    <p> Subtotal: ${totalAmount}</p>
+                    <button onClick={() => navigate("/")}> Continue Shopping </button>
+                    <button
+                        onClick={() => {
+                            checkout();
+                        }}
+                    >
+                        {" "}
+                        Checkout{" "}
+                    </button>
+                </div>
+            ) : (
+                <h1> Your Shopping Cart is Empty</h1>
+            )}
+        </div>
+    );
+};

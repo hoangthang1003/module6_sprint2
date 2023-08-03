@@ -3,13 +3,16 @@ import {Link} from "react-router-dom";
 import {ValueIconCartContext} from "./ValueIconCartContext";
 import Avatar from "@mui/material/Avatar";
 import Dropdown from "react-bootstrap/Dropdown";
-import { FontAwesomeIcon } from 'react-icons/fa'; // 'fa' là mã của bộ biểu tượng FontAwesome
-
+import {ShopContext} from "./shop-context";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUser} from '@fortawesome/free-solid-svg-icons';
 
 export const Header = () => {
     const username = localStorage.getItem("username");
     const account = JSON.parse(localStorage.getItem("account"));
     const roles = [];
+    const { getTotalCartItems} = useContext(ShopContext);
+
     if (account != null) {
         for (let i = 0; i < account.roles.length; i++) {
             roles.push(account.roles[i].authority);
@@ -124,7 +127,7 @@ export const Header = () => {
                                         </li>
                                         <li className="nav-item">
                                             <Link to='/shop' className="nav-link">
-                                                Shop
+                                                Cửa hàng
                                             </Link>
                                         </li>
                                         <li className="nav-item">
@@ -161,13 +164,13 @@ export const Header = () => {
                                     >
                                         <i className="fa fa-fw fa-search text-dark mr-2"/>
                                     </a>
-                                    <Link to="/shop-detail"
+                                    <Link to="/cart"
                                           className="nav-icon position-relative text-decoration-none"
                                     >
                                         <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1"/>
                                         <span
                                             className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
-                7
+ {getTotalCartItems()}
               </span>
                                     </Link>
                                     <div className="nav-item">
@@ -255,7 +258,7 @@ export const Header = () => {
                                                     ) : (
                                                         ""
                                                     )}
-                                                    {roles.includes("ADMIN")? (
+                                                    {roles.includes("ADMIN") ? (
                                                         <Dropdown.Divider/>
                                                     ) : (
                                                         ""
@@ -269,9 +272,11 @@ export const Header = () => {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         ) : (
-                                            <Link to="/login" className="nav-link px-2 login-btn text-decoration-none" nav-link
+                                            <Link to="/login" className="nav-link px-2 login-btn text-decoration-none"
+                                                  nav-link
                                                   link-dark px-2>
-                                                <i className="fa-duotone fa-user"/>
+                                                <FontAwesomeIcon icon={faUser}/> {/* This will render the user icon */}
+
                                             </Link>
                                         )}
                                     </div>

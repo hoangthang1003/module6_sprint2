@@ -1,21 +1,83 @@
-import React, {useEffect, useState} from "react";
-import {productService} from "../service/ProductService";
-import {Link} from "react-router-dom";
-import {useCart} from "./CartContext";
+import React, {useContext, useEffect, useState} from "react";
+import {findProductType, getAllProductByType, productService} from "../service/ProductService";
+import ReactPaginate from "react-paginate";
+import {Product} from "./products";
 
-export function Shop() {
-    const { cartItems,addToCart, removeFromCart, clearCart } = useCart();
+export const Shop = () => {
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
+    const pageSize = 10;
     const [productList, setProductList] = useState(null);
-    const findAll = async () => {
-        const res = await productService.findAll();
-        setProductList(res.content)
-    }
+    const [productType, setProductType] = useState([])
+
+    const getList = async () => {
+        const listCustomer = await productService.findAll(
+            currentPage,
+            pageSize
+        );
+        setTotalPage(listCustomer.totalPages);
+        setProductList(listCustomer.content);
+    };
     useEffect(() => {
-        findAll()
-    }, [])
-    if (!productList) {
-        return null
+        const showProductType = async () => {
+            const rs = await findProductType();
+            setProductType(rs)
+        }
+        showProductType()
+    }, []);
+
+    function handleClickPage(page) {
+        setCurrentPage(page.selected);
     }
+
+    function handleChangePage(pageable) {
+        if (currentPage + 1 === totalPage && pageable.isNext === true) return false;
+        let newCurrentPage = pageable.isNext ? currentPage + 1 : currentPage - 1;
+        newCurrentPage = Math.max(0, Math.min(newCurrentPage, totalPage - 1));
+        setCurrentPage(newCurrentPage);
+    }
+
+
+        // const handleGetProduct = (gender) => {
+        //     const res = productService.findAllByGender(gender)
+        //     setProductList(res.conte)
+        // }
+        // useEffect(()=>{
+        //     handleGetProduct()
+        // },[])
+
+
+    const handleDisplayByType = async (type) => {
+        const res = await getAllProductByType(type);
+        setProductList(res);
+        setCurrentPage(0);
+    };
+
+    // useEffect(() => {
+    //     fetchData(0);
+    // }, []);
+
+    useEffect(() => {
+
+        fetchData(currentPage);
+    }, [currentPage]);
+
+    const fetchData = async (page) => {
+        try {
+            const result = await getList(page);
+            setTotalPage(result.totalPages);
+            setProductList(result.content);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    if (!productList) {
+        // Chưa có dữ liệu productList, hiển thị nội dung loading hoặc thông báo tải dữ liệu
+        return <div>Loading...</div>;
+    }
+
+    console.log(productList);
     return (
         <>
             <>
@@ -64,195 +126,71 @@ export function Shop() {
                     <div className="row">
                         <div className="col-lg-3">
                             <h1 className="h2 pb-4">Thể loại</h1>
-                            <ul className="list-unstyled templatemo-accordion">
-                                <li className="pb-3">
-                                    <a
-                                        className="collapsed d-flex justify-content-between h3 text-decoration-none"
-                                        href="#"
-                                    >
-                                        Giới tính
-                                        <i className="fa fa-fw fa-chevron-circle-down mt-1"/>
-                                    </a>
-                                    <ul className="collapse show list-unstyled pl-3">
-                                        <li>
-                                            <a className="text-decoration-none" href="#">
-                                                Nam
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a className="text-decoration-none" href="#">
-                                                Nữ
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="pb-3">
-                                    <a
-                                        className="collapsed d-flex justify-content-between h3 text-decoration-none"
-                                        href="#"
-                                    >
-                                        Giày&amp;Phụ kiện
-                                        <i className="pull-right fa fa-fw fa-chevron-circle-down mt-1"/>
-                                    </a>
-                                    <ul id="collapseTwo" className="collapse list-unstyled pl-3">
-                                        <li>
-                                            <a className="text-decoration-none" href="#">
-                                                Giày
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a className="text-decoration-none" href="#">
-                                                Phụ kiện
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="pb-3">
-                                    <a
-                                        className="collapsed d-flex justify-content-between h3 text-decoration-none"
-                                        href="#"
-                                    >
-                                        Sản phẩm
-                                        <i className="pull-right fa fa-fw fa-chevron-circle-down mt-1"/>
-                                    </a>
-                                    <ul id="collapseThree" className="collapse list-unstyled pl-3">
-                                        <li>
-                                            <a className="text-decoration-none" href="#">
-                                                Áo
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a className="text-decoration-none" href="#">
-                                                Quần{" "}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a className="text-decoration-none" href="#">
-                                                Giày
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a className="text-decoration-none" href="#">
-                                                Phụ kiện
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <div className="button-container">
+                                {productType.map((value, index) => {
+                                    return (
+                                        <div key={index} className="m-3">
+                                            <button className="btn btn-outline-secondary m-3"
+                                                    onClick={() => handleDisplayByType(value.idType)}
+                                                    style={{background: "none"}}>
+                                                {value.nameType}
+                                            </button>
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                         <div className="col-lg-9">
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <ul className="list-inline shop-top-menu pb-3 pt-1">
-                                        <li className="list-inline-item">
-                                            <a className="h3 text-dark text-decoration-none mr-3" href="#">
-                                                Trang chủ
-                                            </a>
-                                            <g> =></g>
-                                        </li>
-                                        <li className="list-inline-item">
-                                            <a className="h3 text-dark text-decoration-none mr-3" href="#" >
-                                                shop
-                                            </a>
-
-                                        </li>
-
-                                    </ul>
-                                </div>
+                            <div>
+                                {productType.map((value) => {
+                                    return (
+                                        <button className="btn btn-outline-secondary m-3"
+                                                onClick={() => handleDisplayByType(value.idType)}
+                                                style={{background: "none"}}>
+                                            {value.nameType}
+                                        </button>
+                                    );
+                                })}
                                 <div className="col-md-6 pb-4">
                                     <div className="d-flex">
                                         <select className="form-control">
                                             <option>Nổi bật</option>
                                             <option>Từ A-Z</option>
-                                            <option>Nhóm sản phẩm</option>
+                                            <option>Giảm giá</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
-                                {productList.map((product, index) => (
-
-                                    <div className="col-md-4" key={index}>
-                                        <div className="card mb-4 product-wap rounded-0">
-                                            <div className="card rounded-0">
-                                                <img
-                                                    className="card-img rounded-0 img-fluid"
-                                                    src={product.image}
-                                                    style={{
-                                                        height: '350px', // Chiều cao sẽ tự điều chỉnh để giữ tỷ lệ gốc của hình ảnh
-                                                        borderRadius: '8px', // Đặt góc bo tròn 8px cho hình ảnh
-                                                    }}
-                                                />
-                                                <div
-                                                    className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                                    <ul className="list-unstyled">
-                                                        <li>
-                                                            <Link to={`/shop/shop_single/${product.idProduct}`}
-                                                                className="btn btn-success text-white"
-
-                                                            >
-                                                                <i className="far fa-heart"/>
-                                                            </Link>
-                                                        </li>
-                                                        <li>
-                                                            <Link to={`/shop/shop_single/${product.idProduct}`}
-                                                                  className="btn btn-success text-white mt-2"
-
-                                                            >
-                                                                <i className="far fa-eye"/>
-                                                            </Link>
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                className="btn btn-success text-white mt-2"
-                                                                href="shop-single.html"
-                                                            >
-                                                                <i className="fas fa-cart-plus"/>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div className="card-body">
-                                                <a className="h3 text-decoration-none">
-                                                    {product.nameProduct}
-                                                </a>
-                                                <ul className="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                                    <li>Size: {product.size}</li>
-                                                    <li className="pt-2">
-                                                        <span
-                                                            className="product-color-dot color-dot-red float-left rounded-circle ml-1"/>
-                                                        <span
-                                                            className="product-color-dot color-dot-blue float-left rounded-circle ml-1"/>
-                                                        <span
-                                                            className="product-color-dot color-dot-black float-left rounded-circle ml-1"/>
-                                                        <span
-                                                            className="product-color-dot color-dot-light float-left rounded-circle ml-1"/>
-                                                        <span
-                                                            className="product-color-dot color-dot-green float-left rounded-circle ml-1"/>
-                                                    </li>
-                                                </ul>
-                                                <ul className="list-unstyled d-flex justify-content-center mb-1">
-                                                    <li>
-                                                        <i className="text-warning fa fa-star"/>
-                                                        <i className="text-warning fa fa-star"/>
-                                                        <i className="text-warning fa fa-star"/>
-                                                        <i className="text-muted fa fa-star"/>
-                                                        <i className="text-muted fa fa-star"/>
-                                                    </li>
-                                                </ul>
-                                                <p className="text-center mb-0">{new Intl.NumberFormat().format(
-                                                    product.price)} VND</p>
-                                                <button onClick={() => addToCart(product)} className="form-control bg-secondary">Add to Cart</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                {productList.map((product) => (
+                                    <Product data={product}/>
                                 ))}
-
+                                {totalPage > 0 && (
+                                    <div className=" d-flex justify-content-center">
+                                        <ReactPaginate
+                                            previousLabel="Trước"
+                                            nextLabel="Sau"
+                                            pageCount={totalPage}
+                                            onPageChange={handleClickPage}
+                                            onClick={handleChangePage}
+                                            containerClassName="pagination"
+                                            previousClassName="page-item"
+                                            previousLinkClassName="page-link"
+                                            nextClassName="page-item"
+                                            nextLinkClassName="page-link"
+                                            pageClassName="page-item"
+                                            pageLinkClassName="page-link"
+                                            activeClassName="active"
+                                            activeLinkClassName="page-link"
+                                            forcePage={currentPage}
+                                            pageRangeDisplayed={2} // Hiển thị 3 trang trên mỗi lần render
+                                            marginPagesDisplayed={1} // Hiển thị 1 trang ở đầu và cuối danh sách trang
+                                        /></div>)}
                             </div>
                         </div>
                     </div>
+
+
                     {/* End Content */}
                     {/* Start Brands */}
                     <section className="bg-light py-5">
@@ -261,8 +199,7 @@ export function Shop() {
                                 <div className="col-lg-6 m-auto">
                                     <h1 className="h1">Our Brands</h1>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                        eiusmod Lorem ipsum dolor sit amet.
+                                        Thời trang chính hãng đến từ ý,không chỉ đẹp mà còn chất
                                     </p>
                                 </div>
                                 <div className="col-lg-9 m-auto tempaltemo-carousel">

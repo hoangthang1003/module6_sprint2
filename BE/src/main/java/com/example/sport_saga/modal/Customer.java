@@ -14,8 +14,9 @@ import java.util.Set;
 @Table(name = "customer")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_customer")
+    private Integer idCustomer;
     private String name;
     private Boolean gender;
     private LocalDate dateOfBirth;
@@ -33,11 +34,11 @@ public class Customer {
     }
 
     public int getId() {
-        return id;
+        return idCustomer;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idCustomer = id;
     }
 
     public String getName() {

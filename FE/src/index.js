@@ -4,20 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import {CartProvider} from "./component/CartContext";
 import Provider from "react-redux/es/components/Provider";
 import {store} from "./store";
+import {ShopContextProvider} from "./component/shop-context";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <CartProvider>
+            <ShopContextProvider>
                 <BrowserRouter>
                     <App/>
                 </BrowserRouter>
-            </CartProvider>
+            </ShopContextProvider>
         </Provider>
 
     </React.StrictMode>

@@ -8,8 +8,11 @@ import java.util.List;
 
 public interface IProductService {
     Page<Product> showList(Pageable pageable);
+    List<Product> findAll();
 
-    Page<Product> showListByGender(Pageable pageable,Boolean gender);
+    Page<Product> showListByGender(Pageable pageable, Boolean gender);
 
     Product findById(Integer idProduct);
+    List<Product> findByProductType(Integer type);
+
 }
