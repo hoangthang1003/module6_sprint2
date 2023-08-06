@@ -64,5 +64,6 @@ export const historyShopping = async (auth) => {
     }
 }
 export const CartService = {
-    addCart
+    addCart,
+    findCartByCustomerId
 }

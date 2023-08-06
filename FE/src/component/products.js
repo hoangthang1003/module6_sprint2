@@ -51,7 +51,7 @@ export const Product = (props) => {
                         {nameProduct}
                     </a>
                     <ul className="w-100 list-unstyled d-flex justify-content-between mb-0">
-                        <li>Size: {size}</li>
+                        <li>Kích cỡ: {size}</li>
                         <li className="pt-2">
                                                         <span
                                                             className="product-color-dot color-dot-red float-left rounded-circle ml-1"/>
@@ -66,7 +66,7 @@ export const Product = (props) => {
                         </li>
                     </ul>
                     <ul className="w-100 list-unstyled d-flex justify-content-between mb-0">
-                        <li>Size: {quantity}</li>
+                        <li>Số lượng: {quantity}</li>
                     </ul>
                     <ul className="list-unstyled d-flex justify-content-center mb-1">
                         <li>

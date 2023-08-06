@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("api/user/cart")
+@RequestMapping("/api/user/cart")
 public class CartController {
     @Autowired
     private ICartService iCartService;

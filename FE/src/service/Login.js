@@ -1,11 +1,19 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 export const handleCallApiLogIn = async (value) => {
      try {
           const result = await axios.post(
               "http://localhost:8080/api/public/signIn", value);
+          await Swal.fire({
+               title: 'Thông báo',
+               text: 'Đăng nhập thành công!',
+               icon: 'warning',
+               confirmButtonText: 'OK'
+          })
           return result.data;
+
      } catch (e) {
           console.log(e);
      }

@@ -9,7 +9,7 @@ import {ShopSingle} from "./component/shop_single";
 import {Login} from "./component/Login";
 import "../src/css/login.css"
 import {SignUp} from "./component/SignUp";
-import {Cart} from "./component/CartContext";
+import {Cart} from "./component/cart/CartContext";
 
 function App() {
   return (
