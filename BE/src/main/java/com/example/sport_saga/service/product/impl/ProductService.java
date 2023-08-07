@@ -40,4 +40,9 @@ public class ProductService implements IProductService {
     public List<Product> findByProductType(Integer type) {
         return iProductRepository.findByProductType(type);
     }
+
+    @Override
+    public void save(Product product) {
+        iProductRepository.save(product);
+    }
 }

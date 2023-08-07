@@ -14,5 +14,7 @@ public interface IProductService {
 
     Product findById(Integer idProduct);
     List<Product> findByProductType(Integer type);
+    void save(Product product);
+
 
 }

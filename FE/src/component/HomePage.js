@@ -248,7 +248,7 @@ export function HomePage() {
                                 <div className="card h-100">
                                     <a href="shop-single.html">
                                         <img
-                                            src="https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            src="https://images.pexels.com/photos/868704/pexels-photo-868704.jpeg?auto=compress&cs=tinysrgb&w=600"
                                             className="card-img-top"
                                             alt="..."
                                             width="40%"
@@ -269,7 +269,7 @@ export function HomePage() {
                                             href="shop-single.html"
                                             className="h2 text-decoration-none text-dark"
                                         >
-                                            Áo bóng chuyền xanh
+                                            Áo tập yoga đen
                                         </a>
                                         <p className="card-text">
                                             Áo Thun Tay Ngắn Hóa Trang Nhân Vật Anime cosplay Haikyuu Kiểu
@@ -283,9 +283,11 @@ export function HomePage() {
                                 <div className="card h-100">
                                     <a href="shop-single.html">
                                         <img
-                                            src="https://images.pexels.com/photos/274506/pexels-photo-274506.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            src="https://images.pexels.com/photos/7869555/pexels-photo-7869555.jpeg?auto=compress&cs=tinysrgb&w=600"
                                             className="card-img-top"
                                             alt="..."
+                                            width="40%"
+
                                         />
                                     </a>
                                     <div className="card-body">
@@ -303,7 +305,7 @@ export function HomePage() {
                                             href="shop-single.html"
                                             className="h2 text-decoration-none text-dark"
                                         >
-                                            GIÀY THỂ THAO NAM SHRYSS
+                                            Áo gió
                                         </a>
                                         <p className="card-text">
                                             BIG SIZE NGOẠI CỠ GIÀY DÉP NAM CHẤT LIỆU G04 SẢN PHẨM MỚI{" "}
@@ -319,6 +321,8 @@ export function HomePage() {
                                             src="https://cdn.pixabay.com/photo/2016/12/25/15/41/ball-1930191_1280.jpg"
                                             className="card-img-top"
                                             alt="..."
+                                            width="40%"
+
                                         />
                                     </a>
                                     <div className="card-body">

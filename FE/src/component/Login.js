@@ -17,10 +17,8 @@ export function Login() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // Kiểm tra nếu đã đăng nhập (ví dụ, token đã tồn tại trong localStorage), thực hiện chuyển hướng tới trang home
         const token = localStorage.getItem("token");
 
-        // Nếu token đã tồn tại, thực hiện chuyển hướng tới trang home
         if (token) {
             navigate("/");
         }
@@ -61,7 +59,6 @@ export function Login() {
                                 onSubmit={(values) => {
                                     handleCallApiLogIn(values)
                                         .then((e) => {
-                                            console.log(e);
                                             setFailedAccount(null);
                                             localStorage.setItem("token", e.token);
                                             localStorage.setItem("username", e.username);

@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {ValueIconCartContext} from "./ValueIconCartContext";
 import Avatar from "@mui/material/Avatar";
 import Dropdown from "react-bootstrap/Dropdown";
-import {ShopContext} from "./shop-context";
+// import {ShopContext} from "./shop-context";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +11,7 @@ export const Header = () => {
     const username = localStorage.getItem("username");
     const account = JSON.parse(localStorage.getItem("account"));
     const roles = [];
-    const { getTotalCartItems} = useContext(ShopContext);
+    const { iconQuantity, setIconQuantity } = useContext(ValueIconCartContext);
 
     if (account != null) {
         for (let i = 0; i < account.roles.length; i++) {
@@ -143,35 +143,15 @@ export const Header = () => {
                                     </ul>
                                 </div>
                                 <div className="navbar align-self-center d-flex">
-                                    <div className="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                                        <div className="input-group">
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="inputMobileSearch"
-                                                placeholder="Search ..."
-                                            />
-                                            <div className="input-group-text">
-                                                <i className="fa fa-fw fa-search"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a
-                                        className="nav-icon d-none d-lg-inline"
-                                        href="#"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#templatemo_search"
-                                    >
-                                        <i className="fa fa-fw fa-search text-dark mr-2"/>
-                                    </a>
+
                                     <Link to="/cart"
                                           className="nav-icon position-relative text-decoration-none"
                                     >
                                         <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1"/>
                                         <span
                                             className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
- {getTotalCartItems()}
-              </span>
+                                            {iconQuantity}
+                                        </span>
                                     </Link>
                                     <div className="nav-item">
                                         {username ? (
@@ -237,7 +217,7 @@ export const Header = () => {
                                                     {roles.includes("USER") ? (
                                                         <Dropdown.Item className="text-decoration-none">
                                                             <Link
-                                                                to={"/employee/ticket/list"}
+                                                                to={"/user/history"}
                                                                 className="text-dark text-decoration-none"
                                                             >
                                                                 Lịch sử mua hàng

@@ -60,9 +60,9 @@ public class CartController {
             if (product.getQuantity() > existCart.getQuantity()) {
                 existCart.setQuantity(existCart.getQuantity() + cartCreateDTO.getQuantity());
                 iCartService.add(existCart);
-                return new ResponseEntity<>(new ResponseMessage("Cập nhật giỏ hàng thành công"), HttpStatus.OK);
+                return new ResponseEntity<>(new ResponseMessage("Thêm vào giỏ hàng thành công"), HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(new ResponseMessage("Thêm sản phẩm vào giỏ hàng thành công"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(new ResponseMessage("Thêm sản phẩm vào giỏ hàng không thành công"), HttpStatus.BAD_REQUEST);
             }
 
         } else {

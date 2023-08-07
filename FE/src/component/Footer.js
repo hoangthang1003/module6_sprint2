@@ -82,12 +82,12 @@ export function Footer() {
                     <div className="row">
                         <div className="col-md-4 pt-5">
                             <h2 className="h2 text-success border-bottom pb-3 border-light logo">
-                                Zay Shop
+                                Sport Saga
                             </h2>
                             <ul className="list-unstyled text-light footer-link-list">
                                 <li>
                                     <i className="fas fa-map-marker-alt fa-fw"/>
-                                    123 Consectetur at ligula 10660
+                                    123 Nguyễn Tất Thành
                                 </li>
                                 <li>
                                     <i className="fa fa-phone fa-fw"/>
@@ -98,81 +98,81 @@ export function Footer() {
                                 <li>
                                     <i className="fa fa-envelope fa-fw"/>
                                     <a className="text-decoration-none" href="mailto:info@company.com">
-                                        info@company.com
+                                        saga@company.com
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div className="col-md-4 pt-5">
                             <h2 className="h2 text-light border-bottom pb-3 border-light">
-                                Products
+                                Sản phẩm
                             </h2>
                             <ul className="list-unstyled text-light footer-link-list">
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Luxury
+                                        Sang
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Sport Wear
+                                        Thể thao
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Men's Shoes
+                                        Giày cho nam giới
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Women's Shoes
+                                        Giày cho nữ giới
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Popular Dress
+                                        Trang phục phổ biến
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Gym Accessories
+                                       Dành cho Gym
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Sport Shoes
+                                        Giày thể thao
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div className="col-md-4 pt-5">
                             <h2 className="h2 text-light border-bottom pb-3 border-light">
-                                Further Info
+                                Thêm thông tin
                             </h2>
                             <ul className="list-unstyled text-light footer-link-list">
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Home
+                                        Trang chủ
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        About Us
+                                        Về chúng tôi
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Shop Locations
+                                       SẢn phẩm chính hãng từ cửa hàng
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        FAQs
+                                        Liên hệ
                                     </a>
                                 </li>
                                 <li>
                                     <a className="text-decoration-none" href="#">
-                                        Contact
+                                        Phản hồi
                                     </a>
                                 </li>
                             </ul>
@@ -245,17 +245,13 @@ export function Footer() {
                         <div className="row pt-2">
                             <div className="col-12">
                                 <p className="text-left text-light">
-                                    Copyright © 2021 Company Name | Designed by{" "}
-                                    <a rel="sponsored" href="https://templatemo.com" target="_blank">
-                                        TemplateMo
-                                    </a>
+                                    Trang web chính chủ từ CTTN 1 thành viên Thắng ẨU
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/*        FeedBack*/}
             </footer>
         </>
 

@@ -1,7 +1,10 @@
 package com.example.sport_saga.service.cart;
 
+import com.example.sport_saga.dto.RequestPayment;
+import com.example.sport_saga.dto.ResponsePayment;
 import com.example.sport_saga.modal.Cart;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public interface ICartService {
@@ -14,4 +17,6 @@ public interface ICartService {
     void delete(Cart cart);
     Cart findById(int id);
     List<Cart> findCartByCustomerId(int id);
+    ResponsePayment payment(RequestPayment requestPayment) throws UnsupportedEncodingException;
+
 }
