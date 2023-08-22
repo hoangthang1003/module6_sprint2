@@ -36,10 +36,10 @@ public class ProductController {
         return iProductService.findById(id);
     }
 
-    @GetMapping("/gender/{gender}")
-    public ResponseEntity<Page<Product>> showAll(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable Boolean gender){
+    @GetMapping("/productName/{nameProduct}")
+    public ResponseEntity<Page<Product>> showAll(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameProduct){
         Pageable pageable = PageRequest.of(page, 6);
-        Page<Product> listProduct = iProductService.showListByGender(pageable,gender);
+        Page<Product> listProduct = iProductService.showListByName(pageable,nameProduct);
         return new ResponseEntity<>(listProduct, HttpStatus.OK);
     };
 }

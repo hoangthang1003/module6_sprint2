@@ -10,7 +10,7 @@ public interface IProductService {
     Page<Product> showList(Pageable pageable);
     List<Product> findAll();
 
-    Page<Product> showListByGender(Pageable pageable, Boolean gender);
+    Page<Product> showListByName(Pageable pageable, String name);
 
     Product findById(Integer idProduct);
     List<Product> findByProductType(Integer type);

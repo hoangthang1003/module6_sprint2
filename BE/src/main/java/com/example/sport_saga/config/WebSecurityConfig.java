@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and()
-                .csrf().disable()
+                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/public/**","/api/user/ticket/create/**").permitAll()
                 .antMatchers("/api/user/**").hasAnyAuthority("USER", "ADMIN")

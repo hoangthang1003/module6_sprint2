@@ -11,7 +11,7 @@ export const Header = () => {
     const username = localStorage.getItem("username");
     const account = JSON.parse(localStorage.getItem("account"));
     const roles = [];
-    const { iconQuantity, setIconQuantity } = useContext(ValueIconCartContext);
+    const { iconQuantity } = useContext(ValueIconCartContext);
 
     if (account != null) {
         for (let i = 0; i < account.roles.length; i++) {

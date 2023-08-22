@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {historyShopping} from "../../service/CartService";
 import {findCustomer} from "../../service/Customer";
 import {orderDetail} from "../../service/OrderDetailService";
+import moment from "moment";
 
 export function HistoryCart() {
     const [orders, setOrders] = useState([]);
@@ -31,11 +32,10 @@ export function HistoryCart() {
     const getData = async (id) => {
         try {
             const data = await orderDetail(id, token);
-            console.log(data);
             setOrderDetails(data);
+            console.log(orderDetails)
         } catch (error) {
             console.error(error);
-            // Xử lý lỗi ở đây nếu cần
         }
     };
 
@@ -75,7 +75,7 @@ export function HistoryCart() {
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>MH-{order.idOrders}</td>
-                                <td>{order.invoiceDate}</td>
+                                <td>{moment(order.invoiceDate).format('DD-MM-YYYY')}</td>
                                 <td>{new Intl.NumberFormat().format(order.totalPayment)} VND</td>
                                 <td>{order.status  === true ? "Đã giao" : "Đang giao"}</td>
                                 <td>
@@ -115,10 +115,10 @@ export function HistoryCart() {
                                 {orderDetails.map((orderDetail, index) => (
                                     <tr key={index}>
                                         <td>{index + 1}</td>
-                                        <td>{orderDetail?.product?.productName}</td>
+                                        <td>{orderDetail?.product?.nameProduct}</td>
                                         <td><img src={orderDetail?.product?.image} alt="" style={{width:"100px"}}/></td>
                                         <td>{orderDetail?.quantityOrder}</td>
-                                        <td>{orderDetail?.status  == true ? "Đã giao" : "Đang giao"}</td>
+                                        <td>{orderDetail?.status  === true ? "Đã giao" : "Đang giao"}</td>
                                     </tr>
                                 ))}
                                 </tbody>

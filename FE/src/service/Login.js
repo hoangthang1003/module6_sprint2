@@ -9,7 +9,7 @@ export const handleCallApiLogIn = async (value) => {
           await Swal.fire({
                title: 'Thông báo',
                text: 'Đăng nhập thành công!',
-               icon: 'warning',
+               icon: 'info',
                confirmButtonText: 'OK'
           })
           return result.data;

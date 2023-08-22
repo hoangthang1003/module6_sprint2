@@ -4,6 +4,14 @@ export const findAll = async (page,size) => {
     const res = await axios.get(`http://localhost:8080/api/public/product/?page=${page}${size ? `&size=${size}` : ''}`)
     return res.data;
 }
+export const findByName = async (nameProduct) => {
+    try {
+        const res = await axios.get(`http://localhost:8080/api/public/product/productName/${nameProduct}`)
+        return res.data;
+    } catch (e) {
+        console.log(e)
+    }
+}
 export const show = async () => {
     const res = await axios.get(`http://localhost:8080/api/public/product/product`)
     return res.data;

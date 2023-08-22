@@ -63,7 +63,7 @@ export function Cart() {
                     quantity: updatedCarts[cartIndex].quantity,
                     product: updatedCarts[cartIndex].product?.idProduct
                 }, token);
-                findAllCart();
+                await findAllCart();
             } catch (e) {
                 console.log(e);
             }
@@ -79,7 +79,7 @@ export function Cart() {
             quantity: updatedCarts[cartIndex].quantity,
             product: updatedCarts[cartIndex].product?.idProduct
         }, token);
-        findAllCart();
+        await findAllCart();
     };
 
     const handleInputChange = async (event, cartIndex) => {
@@ -94,7 +94,7 @@ export function Cart() {
                     quantity: updatedCarts[cartIndex].quantity,
                     product: updatedCarts[cartIndex].product?.idProduct
                 }, token);
-                findAllCart();
+                await findAllCart();
             }
         } catch (e) {
             console.log(e);

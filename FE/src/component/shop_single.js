@@ -15,6 +15,8 @@ export function ShopSingle() {
     const [carts, setCarts] = useState([]);
 
 
+
+
     const findAllCart = async () => {
         try {
             const result = await findCartByCustomerId(token);
@@ -71,23 +73,26 @@ export function ShopSingle() {
             status: true,
         };
         try {
-                const existingCart = carts.find(c => c.product.idProduct === idProduct);
-                if (existingCart && productQuantity > existingCart.quantity) {
-                    await addCart(cart, token);
-                    await setIconQuantity(iconQuantity + 1);
-                } else {
-                    await Swal.fire({
-                        title: 'Cảnh báo',
-                        text: 'Số lượng sản phẩm ít hơn ngưỡng cho phép!',
-                        icon: 'warning',
-                        confirmButtonText: 'OK',
-                    });
-                }
+            if (productQuantity < carts.quantity -1) {
+                await Swal.fire({
+                    title: 'Cảnh báo',
+                    text: 'Số lượng sản phẩm trong kho không đủ!',
+                    icon: 'warning',
+                    confirmButtonText: 'OK',
+                });
+                return;
+            }
+            await addCart(cart, token);
+            await setQuantity(quantity + 1);
 
         } catch (err) {
             console.log(err);
         }
     };
+    if (quantity === 0) {
+        alert("Số lượng sản phẩm không cho phép")
+        setQuantity(1);
+    }
 
     useEffect(() => {
         {
@@ -98,13 +103,28 @@ export function ShopSingle() {
             })() : setIconQuantity(0)
         }
     }, []);
-    const findById = async () => {
-        const res = await productService.findById(param.id)
-        setProduct(res)
-    }
     useEffect(() => {
         findById()
     }, [])
+
+    const findById = async () => {
+        try {
+            const res = await productService.findById(param.id);
+            if (res) {
+                setProduct(res);
+            } else {
+                console.log("Sản phẩm không tồn tại");
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
+    if (!product) {
+        return <div>Sản phẩm không tồn tại.</div>;
+    }
+
 
     if (!product) {
         return null
@@ -195,7 +215,7 @@ export function ShopSingle() {
                                                         <a href="#">
                                                             <img
                                                                 className="card-img img-fluid"
-                                                                src="../assets/img/product_single_01.jpg"
+                                                                src="https://images.pexels.com/photos/1198172/pexels-photo-1198172.jpeg?auto=compress&cs=tinysrgb&w=600"
                                                                 alt="Product Image 1"
                                                             />
                                                         </a>
@@ -204,7 +224,7 @@ export function ShopSingle() {
                                                         <a href="#">
                                                             <img
                                                                 className="card-img img-fluid"
-                                                                src="../assets/img/product_single_02.jpg"
+                                                                src="https://images.pexels.com/photos/5741061/pexels-photo-5741061.jpeg?auto=compress&cs=tinysrgb&w=600"
                                                                 alt="Product Image 2"
                                                             />
                                                         </a>
@@ -213,7 +233,7 @@ export function ShopSingle() {
                                                         <a href="#">
                                                             <img
                                                                 className="card-img img-fluid"
-                                                                src="../assets/img/product_single_03.jpg"
+                                                                src="https://images.pexels.com/photos/35009/runner-marathon-military-afghanistan.jpg?auto=compress&cs=tinysrgb&w=600"
                                                                 alt="Product Image 3"
                                                             />
                                                         </a>

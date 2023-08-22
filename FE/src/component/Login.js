@@ -90,16 +90,7 @@ export function Login() {
                                             placeholder="Nhập tài khoản"
 
                                         />
-                                        <td>
-                                            <ErrorMessage
-                                                name="username"
-                                                className="error-mess m-0"
-                                                component={"p"}
-                                            />
-                                            {failedAccount && (
-                                                <p className="error-mess m-0">{failedAccount}</p>
-                                            )}
-                                        </td>
+
                                     </div>
                                     <div className="mb-3">
                                         <Field
@@ -110,6 +101,16 @@ export function Login() {
                                             placeholder="Nhập mật khẩu"
                                         />
                                     </div>
+                                    <td>
+                                        <ErrorMessage
+                                            name="username"
+                                            className="error-mess m-0"
+                                            component={"p"}
+                                        />
+                                        {failedAccount && (
+                                            <p className="error-mess m-0" style={{color:"red"}}>{failedAccount}</p>
+                                        )}
+                                    </td>
                                     <div className="text-center">
                                         <button type="submit" className="btn btn-color px-5 mb-5 w-100">
                                             Đăng nhập

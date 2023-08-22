@@ -1,11 +1,11 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import {useContext} from "react";
 
 export const findCartByCustomerId = async (token) => {
     const headers = {Authorization: "Bearer " + token}
     try {
         const result = await axios.get(`http://localhost:8080/api/user/cart`, {headers});
-        console.log(token)
         return result.data;
     } catch (e) {
         console.log(e);
@@ -13,9 +13,12 @@ export const findCartByCustomerId = async (token) => {
 }
 
 export const addCart = async (cart, token) => {
+
+
     const headers = {Authorization: "Bearer " + token}
     try {
         await axios.post(`http://localhost:8080/api/user/cart/add`, {...cart}, {headers})
+
 
         await Swal.fire({
             title: 'Thông báo',
@@ -27,7 +30,7 @@ export const addCart = async (cart, token) => {
     } catch (e) {
         await Swal.fire({
             title: 'Cảnh báo',
-            text: 'Số lượng sản phẩm ít hơn ngưỡng cho phép!',
+            text: 'Số lượng sản phẩm không đủ!',
             icon: 'warning',
             confirmButtonText: 'OK'
         });

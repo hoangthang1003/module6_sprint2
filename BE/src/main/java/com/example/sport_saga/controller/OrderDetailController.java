@@ -35,6 +35,7 @@ public class OrderDetailController {
         String token = jwtTokenFilter.getJwt(request);
         String name = jwtProvider.getUserNameFromToken(token);
         Customer customer = iCustomerService.findByAccount(name);
-        return iOrderDetailService.findAllByOrder(customer.getId());
+        return iOrderDetailService.findAllByOrder(id);
+
     }
 }

@@ -5,9 +5,9 @@ import {findCustomer} from "../service/Customer";
 
 export function PaymentSuccess() {
 
-    const token = sessionStorage.getItem("TOKEN");
-    const username = sessionStorage.getItem("USERNAME");
-    const [customer, setCustomer] = useState();
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+    const [customer, setCustomer] = useState(null);
     const currentDate = new Date();
     const param = useParams();
 
@@ -19,6 +19,10 @@ export function PaymentSuccess() {
             })() : setCustomer(null)
         }
     }, []);
+    if (!customer) {
+        return null
+    }
+    console.log(customer)
     return (
         <>
             <div className="container-fluid" style={{textAlign: "center"}}>
@@ -30,7 +34,7 @@ export function PaymentSuccess() {
                         <tbody>
                         <tr>
                             <th>Tên khách hàng</th>
-                            <td>{customer?.customerName}</td>
+                            <td>{customer?.name}</td>
                         </tr>
                         <tr>
                             <th>Địa chỉ</th>

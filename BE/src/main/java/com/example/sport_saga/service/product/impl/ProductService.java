@@ -28,8 +28,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Page<Product> showListByGender(Pageable pageable, Boolean gender) {
-        return iProductRepository.findAllProductByGender(pageable,gender);
+    public Page<Product> showListByName(Pageable pageable, String name) {
+        return iProductRepository.findAllProductByName(pageable,name);
     }
 
     @Override

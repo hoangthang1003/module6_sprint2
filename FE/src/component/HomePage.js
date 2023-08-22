@@ -183,7 +183,6 @@ export function HomePage() {
                 {/*            </div>*/}
                 {/*        </div>*/}
                 {/*    </div>*/}
-
                 {/*</div>*/}
                 <section className="container py-5">
                     <div className="row text-center pt-3">
