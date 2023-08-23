@@ -25,7 +25,9 @@ export const addCart = async (cart, token) => {
             text: 'Thêm thành công sản phẩm vào giỏ hàng!',
             icon: 'success',
             confirmButtonText: 'OK',
+
         });
+
 
     } catch (e) {
         await Swal.fire({

@@ -249,7 +249,6 @@ export const Shop = () => {
                                                     {product.nameProduct}
                                                 </a>
                                                 <ul className="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                                    <li>Kích cỡ: {product.size}</li>
                                                     <li className="pt-2">
                                                         <span
                                                             className="product-color-dot color-dot-red float-left rounded-circle ml-1"/>

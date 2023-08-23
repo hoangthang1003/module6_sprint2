@@ -75,12 +75,12 @@ public class OrdersController {
         List<OrderDetail> orderDetails = iOrderDetailService.findAll(customer.getId());
         Set<Integer> integers = new HashSet<>();
         List<Orders> orders = new ArrayList<>();
-        for (int i = 0; i < orderDetails.size(); i++) {
-            integers.add(orderDetails.get(i).getOrders().getIdOrders());
+        for (OrderDetail orderDetail : orderDetails) {
+            integers.add(orderDetail.getOrders().getIdOrders());
         }
         List<Integer> count = new ArrayList<>(integers);
-        for (int i = 0; i < count.size(); i++) {
-            Orders order = iOrderService.findById(count.get(i));
+        for (Integer integer : count) {
+            Orders order = iOrderService.findById(integer);
             orders.add(order);
         }
         return orders;

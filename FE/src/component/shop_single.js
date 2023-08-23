@@ -412,12 +412,12 @@ export function ShopSingle() {
                                                             name="submit"
                                                             value="buy"
                                                         >
-                                                            Buy
+                                                            Mua
                                                         </button>
                                                     </div>
                                                     <div className="col d-grid">
-                                                        <button type="submit" className="btn btn-success btn-lg"
-                                                                name="submit" onClick={() => handleAddCart(param.id)}>Add To Cart
+                                                        <button type="submit" className="btn btn-success btn-lg "
+                                                                name="submit" onClick={() => handleAddCart(param.id)}>Thêm vào giỏ hàng
                                                         </button>
                                                     </div>
                                                 </div>
